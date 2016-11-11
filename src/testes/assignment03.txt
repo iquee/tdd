@@ -1,0 +1,37 @@
+Modelando com mock
+- Desenvolver uma classe que depende de outra?
+	Classe com serviço de login:
+	- necessetiva uma DAO
+	* mas a DAO não existe. Começar o tdd envolvendo somente essa DAO
+	- substituindo o DAO pelo mock:
+
+	1º passo: começar criando o obj, o mock da dependencia e o inserindo no objeto(ServicoLogin)
+	@Test
+	public void loginComSucesso(){
+		ServicoLogin serv = new ServicoLogin();
+		MockUsuarioDAO mock = new MockUsuarioDAO();
+		serv.setDAO(mock);
+		mock.usuarioEsperado("user");
+		mock.retornaSenha("senha");
+		assertTrue(serv.login("user", "senha"));
+		mock.verificaChamadas();  // verificar se as chamados que eu esperava que a classe fizesse realmente foram chamadas.
+	}
+
+	2º passo: O mock precisa implementar a interface da dependencia. Criar os metodos da interface da dependencia
+	@Override
+	public String getSenha(String usuario){
+		this.usuario = usuario;
+		return senha;
+	};
+	@Override
+	public String usuarioEsperado(String u){
+		esperado = u;
+	};
+	@Override
+	public String retornaSenha(String s){
+		senha = s;
+	};
+	@Override
+	public String verificarChaamdas (String usuario){
+		assertEquals(usuario, esperado);
+	};
