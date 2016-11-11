@@ -1,4 +1,4 @@
-package tdd;
+package assignment01;
 
 import static org.junit.Assert.*;
 
