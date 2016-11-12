@@ -5,18 +5,18 @@ import java.util.List;
 
 public class CarrinhoCompras {
 	
-	private List<Produto> itens = new ArrayList<>();
+	private List<Produto> items = new ArrayList<>();
 	private List<ObservadorCarrinho> observadores = new ArrayList<>();
 	
 	public void adicionaProduto(Produto p){		
-		itens.add(p);
+		items.add(p);
 		for (ObservadorCarrinho observador: observadores)
 			observador.produtoAdicionado(p.getNome(), p.getValor());
 	}
 	
 	public int total(){
 		int total = 0;
-		for (Produto produto : itens)
+		for (Produto produto : items)
 			total += produto.getValor();
 		return total;
 	}
